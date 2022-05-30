@@ -1,24 +1,110 @@
-# README
+Sample rails app for https://github.com/rmosolgo/graphql-ruby/issues/4075
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## How to setup
 
-Things you may want to cover:
+```sh
+bundle install
+bin/rails db:migrate
+bin/rails db:seed
+```
 
-* Ruby version
+## Sample query
 
-* System dependencies
+```sh
+# Start server
+bin/rails server
 
-* Configuration
+# Open http://localhost:3000/graphql_playground
+```
 
-* Database creation
+```gql
+# without dataloader
+{
+  users {
+    name
+    blogs {
+      title
+      comments {
+        body
+      }
+    }
+  }
+}
+```
 
-* Database initialization
+```gql
+# with dataloader
+{
+  users {
+    name
+    blogDataloader {
+      title
+      commentsDataloader {
+        body
+      }
+    }
+  }
+}
 
-* How to run the test suite
+# and order
+{
+  users {
+    name
+    blogDataloader(order: DESC) {
+      title
+    }
+  }
+}
+```
 
-* Services (job queues, cache servers, search engines, etc.)
+```gql
+# without dataloader, with connection
+{
+  users {
+    name
+    blogsConnection {
+      nodes {
+        title
+      }
+    }
+  }
+}
 
-* Deployment instructions
+# and order
+{
+  users {
+    name
+    blogsConnection(order: DESC) {
+      nodes {
+        title
+      }
+    }
+  }
+}
+```
 
-* ...
+```gql
+# with dataloader, with connection
+{
+  users {
+    name
+    blogsConnectionDataloader {
+      nodes {
+        title
+      }
+    }
+  }
+}
+
+# and order
+{
+  users {
+    name
+    blogsConnectionDataloader(order: DESC) {
+      nodes {
+        title
+      }
+    }
+  }
+}
+```
