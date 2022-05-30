@@ -10,7 +10,7 @@ module Types
     field :user, Types::UserType, null: false
     def user = dataloader.with(Sources::Association, :user).load(object)
 
-    field :user_raw, Types::UserType, null: false, method: user
+    field :user_raw, Types::UserType, null: false, method: :user
 
     field :comments, [Types::CommentType], null: false
     def comments = dataloader.with(Sources::Association, :comments).load(object)
