@@ -8,6 +8,10 @@ module Types
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
     field :blog, Types::BlogType, null: false
-    def blog = dataloader.with(Sources::Association, :blog).load(object)
+
+    field :blog_dataloader, Types::BlogType, null: false
+    def blog_dataloader
+      dataloader.with(Sources::Association, :blog).load(object)
+    end
   end
 end
