@@ -11,5 +11,10 @@ module Types
     def users
       User.all
     end
+
+    field :patients, [Types::PatientType], null: false
+    def patients
+      Patient.all
+    end
   end
 end

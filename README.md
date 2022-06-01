@@ -108,3 +108,15 @@ bin/rails server
   }
 }
 ```
+
+```gql
+# has_many through with dataloader
+{
+  patients {
+    name
+    physicians {
+      name
+    }
+  }
+}
+```
