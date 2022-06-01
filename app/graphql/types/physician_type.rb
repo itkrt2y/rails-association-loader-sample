@@ -7,9 +7,9 @@ module Types
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
 
-    field :patients, [Types::PatientType], null: false
-    def patients
-      dataloader.with(Sources::Association, :patients).load(object)
+    field :physicians, [Types::PhysicianType], null: false
+    def physicians
+      dataloader.with(Sources::Association, :physicians).load(object)
     end
   end
 end
